@@ -1,7 +1,18 @@
 {
     "configurations": [
         {
-            "name": "Run Current File",
+            "name": "TS Current File",
+            "program": "${file}",
+            "request": "launch",
+            "runtimeExecutable": "node",
+            "runtimeArgs": ["--nolazy", "-r", "/usr/local/lib/node_modules/ts-node/register/transpile-only"],
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "pwa-node"
+        },
+        {
+            "name": "JS Current File",
             "program": "${file}",
             "request": "launch",
             "skipFiles": [
@@ -9,8 +20,5 @@
             ],
             "type": "pwa-node"
         }
-        
-        
-    
     ]
 }
