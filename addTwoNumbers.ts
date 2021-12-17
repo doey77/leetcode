@@ -83,7 +83,8 @@ const addTwoNumbers = (l1: ListNode | null,
     let strNum1 = numArrToString(reversed1);
     let strNum2 = numArrToString(reversed2);
 
-    const sumStr = (parseInt(strNum1) + parseInt(strNum2)).toString();
+    const sum = parseInt(strNum1) + parseInt(strNum2)
+    const sumStr = sum.toFixed(20);
 
     return strNumToLL(reverseString(sumStr));
 };
