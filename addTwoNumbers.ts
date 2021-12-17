@@ -32,6 +32,12 @@ const getCount = (node: ListNode) => {
     return count
 }
 
+const numArrToString = (nums: number[]): string => {
+    let str = '';
+    nums.forEach(num => str+=num.toString())
+    return str;
+}
+
 /**
  * @param node Must be first node
  */
@@ -74,29 +80,38 @@ const addTwoNumbers = (l1: ListNode | null,
     const reversed1 = reversedLLArray(l1);
     const reversed2 = reversedLLArray(l2);
 
-    let strNum1 = "";
-    let strNum2 = "";
-
-    for (let index = 0; index < reversed1.length; index++) {
-        strNum1 += reversed1[index].toString();
-        strNum2 += reversed2[index].toString();
-    }
+    let strNum1 = numArrToString(reversed1);
+    let strNum2 = numArrToString(reversed2);
 
     const sumStr = (parseInt(strNum1) + parseInt(strNum2)).toString();
 
     return strNumToLL(reverseString(sumStr));
 };
 
-const list1 =
-new ListNode(2,
-    new ListNode(4,
-        new ListNode(3)));
+// Test cases
 
-const list2 =
-new ListNode(5,
-    new ListNode(6,
-        new ListNode(4)));
+/**
+ * Create Linked Lists from an array
+ */
+const llFromArr = (nums: number[]): ListNode => {
+    const firstNode = new ListNode(nums[0]);
+    let currentNode = firstNode;
+    for (let i = 1; i < nums.length; i++) {
+        const num = nums[i];
+        const newNode = new ListNode(num);
+        currentNode.next = newNode;
+        currentNode = newNode;
+    }
+    return firstNode;
+}
 
-const ex1 = addTwoNumbers(list1, list2); // 342 + 465 = 807; so LL will be 7 - 0 - 8
+// Case 1
+// const list1 = llFromArr([2,4,3]);
+// const list2 = llFromArr([5,6,4]);
+
+const list1 = llFromArr([1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]);
+const list2 = llFromArr([5,6,4]);
+
+const example = addTwoNumbers(list1, list2); // 342 + 465 = 807; so LL will be 7 - 0 - 8
 
 console.log('fin');
