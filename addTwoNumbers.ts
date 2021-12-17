@@ -20,16 +20,6 @@ class ListNode {
         this.val = (val===undefined ? 0 : val)
         this.next = (next===undefined ? null : next)
     }
-
-    // getCount() {
-    //     let count = 1;
-    //     let next = this.next;
-    //     while (next) {
-    //         count++;
-    //         next = next?.next;
-    //     }
-    //     return count;
-    // }
 }
 
 const getCount = (node: ListNode) => {
@@ -47,7 +37,7 @@ const getCount = (node: ListNode) => {
  */
 const reversedLLArray = (node:ListNode) => {
     const count = getCount(node);
-    const arr = Array.apply(null, Array(count)).map(()=>null);
+    const arr: number[] = [];
     let i = count-1;
     arr[i] = node.val;
     i--;
@@ -60,18 +50,41 @@ const reversedLLArray = (node:ListNode) => {
     return arr;
 }
 
-function addTwoNumbers(l1: ListNode | null,
-    l2: ListNode | null): ListNode | null
+const strNumToLL = (strNum:string): ListNode => {
+    const firstNode = new ListNode(parseInt(strNum[0]));
+    let currentNode = firstNode;
+
+    for (let i = 1; i < strNum.length; i++) {
+        const num = parseInt(strNum[i]);
+        const newNode = new ListNode(num);
+        currentNode.next = newNode;
+        currentNode = newNode;
+    }
+
+    return firstNode;
+}
+
+const reverseString = (str:string) => {
+    return str.split('').reverse().join('');
+}
+
+const addTwoNumbers = (l1: ListNode | null,
+    l2: ListNode | null): ListNode | null =>
 {
-    console.log(getCount(l1));
     const reversed1 = reversedLLArray(l1);
     const reversed2 = reversedLLArray(l2);
 
+    let strNum1 = "";
+    let strNum2 = "";
+
     for (let index = 0; index < reversed1.length; index++) {
-        
+        strNum1 += reversed1[index].toString();
+        strNum2 += reversed2[index].toString();
     }
 
-    return null;
+    const sumStr = (parseInt(strNum1) + parseInt(strNum2)).toString();
+
+    return strNumToLL(reverseString(sumStr));
 };
 
 const list1 =
@@ -84,4 +97,6 @@ new ListNode(5,
     new ListNode(6,
         new ListNode(4)));
 
-const ex1 = addTwoNumbers(list1, list2); // 342 + 465 = 807
+const ex1 = addTwoNumbers(list1, list2); // 342 + 465 = 807; so LL will be 7 - 0 - 8
+
+console.log('fin');
